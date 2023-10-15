@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pipe : MonoBehaviour
 {
-    public float speed;
+    public static float speed; //static lets you get vars from anywhere
     private float startX;
     private float endX;
 

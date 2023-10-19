@@ -12,12 +12,16 @@ public class Bird : MonoBehaviour
     public float rotatePower;
     public float speed;
     public GameObject endScreen;
+    public GameObject flashEffect;
 
     private Rigidbody2D rb;
-    private string currentScene;
     private int playerScore;
     private TextMeshPro scoreText;
-    private AudioSource audioS;
+    private AudioSource scoreS;
+    private AudioSource flapS;
+    private AudioSource hitS;
+    private AudioSource deathS;
+    private bool sound = true;
 
     #endregion
 
@@ -28,20 +32,29 @@ public class Bird : MonoBehaviour
 
         //Get a random Bird
         int i = Random.Range(0, transform.childCount);
-        
-        transform.GetChild(i).GetComponent<SpriteRenderer>().enabled = true;
+
+        transform.GetChild(i).gameObject.SetActive(true);
 
         // Get Objects
         rb = GetComponent<Rigidbody2D>();
-        currentScene = SceneManager.GetActiveScene().name;
         scoreText = GameObject.Find("PlayerScore").GetComponent<TextMeshPro>();
-        audioS = GameObject.Find("ScoreSound").GetComponent<AudioSource>();
+        scoreS = GameObject.Find("ScoreSound").GetComponent<AudioSource>();
+        flapS = GameObject.Find("WingSound").GetComponent<AudioSource>();
+        hitS = GameObject.Find("HitSound").GetComponent<AudioSource>();
+        deathS = GameObject.Find("DeathSound").GetComponent<AudioSource>();
+        Invoke("setGravityScale", 1.25f);
     }
 
     // The bird dies!
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Die();
+        if(sound)
+        {
+            hitS.Play();
+            deathS.Play();
+            sound = false;
+        }
     }
     // Die function
     void Die()
@@ -50,7 +63,14 @@ public class Bird : MonoBehaviour
         jumpSpeed = 0;
 
         Invoke("ShowMenu", 1f);
-        //SceneManager.LoadScene(currentScene);
+        flashEffect.SetActive(true);
+
+        PlayerPrefs.SetInt("Score", playerScore);
+    }
+
+    void setGravityScale()
+    {
+        rb.gravityScale = 3;
     }
 
     void ShowMenu()
@@ -58,19 +78,26 @@ public class Bird : MonoBehaviour
         scoreText.gameObject.SetActive(false);
         endScreen.SetActive(true);
     }
+
     //get points if goes through pipes
     private void OnTriggerEnter2D(Collider2D collision)
     {
         playerScore++;
         scoreText.text = playerScore.ToString();
-        audioS.Play();
+        scoreS.Play();
     }
 
     void Update()
     {
+
         // check when mouse is clicked
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            if(rb.gravityScale != 3)
+            {
+                rb.gravityScale = 3;
+            }
+            flapS.Play();
             rb.velocity = Vector2.up * jumpSpeed;
         }
 

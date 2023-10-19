@@ -405,10 +405,10 @@ TextureImporter:
       name: Spritesheet_16
       rect:
         serializedVersion: 2
-        x: 312
-        y: 409
-        width: 17
-        height: 12
+        x: 310
+        y: 405
+        width: 19
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -460,27 +460,6 @@ TextureImporter:
       bones: []
       spriteID: 5564fec0f58036443848bfec4e8ead7c
       internalID: 379687253
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spritesheet_25
-      rect:
-        serializedVersion: 2
-        x: 310
-        y: 405
-        width: 5
-        height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 73ae5cf986f30fc4ea6a0f3c98513da9
-      internalID: -1064086308
       vertices: []
       indices: 
       edges: []
@@ -1609,7 +1588,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Spritesheet_76: -1179861562
+      Spritesheet_17: 1470244217
       Spritesheet_72: 710736433
       Spritesheet_28: 1456764962
       Spritesheet_29: 535464268
@@ -1691,7 +1670,7 @@ TextureImporter:
       Spritesheet_37: 752181530
       Spritesheet_67: -1408842674
       Spritesheet_22: 2116023976
-      Spritesheet_17: 1470244217
+      Spritesheet_76: -1179861562
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -6,6 +6,14 @@ using UnityEngine.SceneManagement;
 public class FlappyButton : MonoBehaviour
 {
     public string sceneName;
+    public GameObject blackScreen;
+    private SpriteRenderer render;
+    private bool pressed;
+
+    void Start()
+    {
+        if(blackScreen)render = blackScreen.GetComponent<SpriteRenderer>();
+    }
 
     private void OnMouseDown()
     {
@@ -15,6 +23,23 @@ public class FlappyButton : MonoBehaviour
     private void OnMouseUp()
     {
         transform.position += Vector3.up * 0.1f;
-        if(sceneName != "")SceneManager.LoadScene(sceneName);
+        if (blackScreen) pressed = true;
+        else if (sceneName != "") SceneManager.LoadScene(sceneName);
+    }
+
+    void Update()
+    {
+        if(pressed)
+        {
+            var color = render.color;
+            color.a += Time.deltaTime * 2;
+
+            render.color = color;
+
+            if(color.a > 0.9f)
+            {
+                if (sceneName != "") SceneManager.LoadScene(sceneName);
+            }
+        }
     }
 }

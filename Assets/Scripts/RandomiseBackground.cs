@@ -9,6 +9,6 @@ public class RandomiseBackground : MonoBehaviour
     {
         int i = Random.Range(0, transform.childCount);
 
-        transform.GetChild(i).GetComponent<SpriteRenderer>().enabled = true;
+        transform.GetChild(i).gameObject.SetActive(true);
     }
 }
